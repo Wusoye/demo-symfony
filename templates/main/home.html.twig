@@ -1,0 +1,33 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+
+    <div class="container">
+        <table class="table">
+            <thead>
+            <tr>
+                <th style="width: 19%">Name</th>
+                <th style="width: 19%">Date sortie</th>
+                <th style="width: 19%">Type</th>
+                <th style="width: 19%">Duree (minutes)</th>
+                <th style="width: 4%">plus</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for serie in series %}
+
+                <tr>
+                    <th>{{ serie['name'] }}</th>
+                    <td>{{ serie['sortie']|format_datetime(pattern="yyyy-MM-dd", locale='fr') }}</td>
+                    <td>{{ serie['type'] }}</td>
+                    <td>{{ serie['duree'] }}</td>
+                    <td><a class="text-decoration-none" href="{{ path('main_test') }}" target="_blank">+</a></td>
+                </tr>
+
+            {% endfor %}
+            </tbody>
+        </table>
+
+    </div>
+
+{% endblock %}
