@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+
+    {{ parent() }} | The best series
+
+{% endblock %}
+
+{% block body %}
+
+
+    <div class="container">
+        {#
+        <h4 class="display-4 mt-3">Liste Series</h4>
+        #}
+        <div class="container text-center">
+            <div class="row row-cols-4 g-2 ms-3">
+                {% for uneSerie in listSerie %}
+                    <div class="col">
+                        <div class="card" style="width: 18rem; height: 50rem;">
+                            <img src="{{ asset('img/posters/series/' ~ uneSerie.poster) }}"  class="card-img-top" style="min-height: 430px" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title" style="min-height: 48px">{{ uneSerie.name }}</h5>
+                                {#
+                                <p class="card-text" style="overflow-y: auto; max-height: 200px; min-height: 200px;">{{ uneSerie.overview }}</p>
+                                #}
+
+                                <p class="card-text">
+                                    <ul class="list-group list-group-flush" style="min-height: 200px">
+                                        <li class="list-group-item">Status: {{ uneSerie.status }}</li>
+                                        <li class="list-group-item">Vote: {{ uneSerie.vote }}</li>
+                                        <li class="list-group-item">Popularity: {{ uneSerie.popularity }}</li>
+                                        <li class="list-group-item">Genre: {{ uneSerie.genre }}</li>
+                                    </ul>
+                                </p>
+                                <a href="{{ path('serie_detail', {id: uneSerie.id}) }}" title="View serie's details - {{ uneSerie.seasons | length }} seasons" class="btn btn-primary">En savoir plus</a>
+                            </div>
+                        </div>
+                    </div>
+                {% else %}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+

@@ -28,9 +28,10 @@ class MainController extends AbstractController
             'type' => 'Docu.',
             'duree' => 65
         ]];
-        return $this->render('main/home.html.twig', [
+        /*return $this->render('main/home.html.twig', [
             'series' => $series
-        ]);
+        ]);*/
+        return $this->redirectToRoute('serie_list');
     }
 
     #[Route("/test", name: "main_test")]

@@ -1,0 +1,62 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+
+    {{ parent() }} | Detail serie
+
+{% endblock %}
+
+{% block body %}
+
+    <div class="container">
+        {#
+        <h4 class="display-4 mt-3">Detail Series</h4>
+        #}
+        {% if uneSerie != null %}
+            <div class="card mb-3" style="max-width: 100%;">
+                <div class="row g-0">
+                    <div class="col-md-4">
+                        <img src="{{ asset('img/posters/series/' ~ uneSerie.poster) }}" class="img-fluid rounded-start" alt="...">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ uneSerie.name }}</h5>
+                            <p class="card-text">{{ uneSerie.overview }}</p>
+                            <p class="card-text"><small class="text-muted">Dernière diffusion {{ uneSerie.lastAirDate|format_datetime(pattern="yyyy-MM-dd", locale='fr') }}</small></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% else %}
+            <div class="alert alert-danger d-flex align-items-center" role="alert">
+                <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+                <div>
+                    Erreur la série sélectionné n'existe pas.
+                </div>
+            </div>
+        {% endif %}
+
+
+        <div class="row row-cols-4 g-2 ms-3">
+            {% for uneSeason in uneSerie.seasons %}
+                <div class="col">
+                    <div class="card" style="width: 18rem; height: 45rem;">
+                        <img src="{{ asset('img/posters/seasons/' ~ uneSeason.poster) }}" class="card-img-top" style="min-height: 430px" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title" style="min-height: 48px">Saison {{ uneSeason.number }}</h5>
+                            {#
+                            <p class="card-text" style="overflow-y: auto; max-height: 200px; min-height: 200px;">{{ uneSerie.overview }}</p>
+                                <a href="{{ path('serie_detail', {id: uneSeason.id}) }}" class="btn btn-primary">En savoir plus</a>
+                            #}
+                            {% if uneSeason.overview %}
+                            <p class="card-text" style="overflow-y: auto; max-height: 200px; min-height: 200px;">{{ uneSeason.overview }}</p>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            {% else %}
+            {% endfor %}
+        </div>
+    </div>
+
+{% endblock %}
